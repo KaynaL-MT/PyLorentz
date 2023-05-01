@@ -17,6 +17,8 @@ Known Bugs:
 Author: Arthur McCray, ANL, Summer 2019.
 """
 
+# from Desktop_KaynaMBPro.GitHub.PyLorentz.Examples.SIM_template.ipynb:pylance-notebook-cell:X32sZmlsZQ== import Tphi
+# from Desktop_KaynaMBPro.GitHub.PyLorentz.Examples.SIM_template.ipynb:pylance-notebook-cell:X32sZmlsZQ== import ObjWave
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import colors
@@ -204,7 +206,8 @@ def sim_images(
             text.write(f"mem_xip0 (nm) \t{mem_xip0:g}\n")
             text.write(f"add_random \t{add_random:g}\n")
 
-    return (Tphi, im_un, im_in, im_ov)
+    # return (Tphi, im_un, im_in, im_ov)
+    return (ObjWave, Tphi, im_un, im_in, im_ov)
 
 
 def std_mansPhi(
@@ -785,7 +788,7 @@ def reconstruct_ovf(
 
     if flip:
         sim_name = savename + "_flip"
-        Tphi_flip, im_un_flip, im_in_flip, im_ov_flip = sim_images(
+        ObjWave, Tphi_flip, im_un_flip, im_in_flip, im_ov_flip = sim_images(
             mphi=-1 * mphi,
             ephi=ephi,
             isl_shape=thk_map_tilt,
@@ -803,7 +806,8 @@ def reconstruct_ovf(
         )
         sim_name = savename + "_unflip"
 
-    Tphi, im_un, im_in, im_ov = sim_images(
+    ObjWave, Tphi, im_un, im_in, im_ov = sim_images(
+    # Tphi, im_un, im_in, im_ov = sim_images(
         mphi=mphi,
         ephi=ephi,
         isl_shape=thk_map_tilt,
@@ -870,6 +874,8 @@ def reconstruct_ovf(
     results["mag_x"] = mag_x
     results["mag_y"] = mag_y
     results["mag_z"] = mag_z
+    # results["amp"] = Amp
+    results["objwave"] = ObjWave 
 
     return results, ptie
 
