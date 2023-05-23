@@ -207,7 +207,7 @@ def sim_images(
             text.write(f"add_random \t{add_random:g}\n")
 
     # return (Tphi, im_un, im_in, im_ov)
-    return (ObjWave, Tphi, im_un, im_in, im_ov)
+    return (Amp, ObjWave, Tphi, im_un, im_in, im_ov)
 
 
 def std_mansPhi(
@@ -806,7 +806,7 @@ def reconstruct_ovf(
         )
         sim_name = savename + "_unflip"
 
-    ObjWave, Tphi, im_un, im_in, im_ov = sim_images(
+    Amp, ObjWave, Tphi, im_un, im_in, im_ov = sim_images(
     # Tphi, im_un, im_in, im_ov = sim_images(
         mphi=mphi,
         ephi=ephi,
@@ -828,6 +828,8 @@ def reconstruct_ovf(
         show_sims(Tphi, im_un, im_in, im_ov, title="Simulated Unflipped Images")
         if flip:
             show_sims(
+                # Amp,
+                # ObjWave,
                 Tphi_flip,
                 im_un_flip,
                 im_in_flip,
@@ -874,7 +876,7 @@ def reconstruct_ovf(
     results["mag_x"] = mag_x
     results["mag_y"] = mag_y
     results["mag_z"] = mag_z
-    # results["amp"] = Amp
+    results["amp"] = Amp
     results["objwave"] = ObjWave 
 
     return results, ptie

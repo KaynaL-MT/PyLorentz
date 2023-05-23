@@ -138,8 +138,11 @@ class TIE_params(object):
         }
         if no_mask:
             self.mask = np.ones(self.shape)
+            # print("no_mask:", no_mask)
         else:
-            self.make_mask()
+            # print("creating mask")
+            # self.make_mask() >>>>>>>>>>>>> BUGGGGGG
+            self.make_mask(imstack=imstack)
 
     def pre_Lap(self, pscope, def_step=1):
         """Scaling prefactor used in the TIE reconstruction.
@@ -177,16 +180,26 @@ class TIE_params(object):
             None. Assigns result to self.mask()
         """
         if len(self.imstack) == 1:  # SITIE params
+            # print("sitie")
             self.mask = np.ones(self.shape)
+            # print("SITIE")
             return
         if imstack is None:
+            # print("imstack = none")
+            # print("self.imstack", self.imstack)
+            # print("self.flipstack", self.flipstack)
             imstack = np.concatenate([self.imstack, self.flipstack])
-        shape = np.shape(imstack[0])
+            # print("imstack:", imstack.shape)
+        shape = np.shape(imstack[1])
+        # print("shape:", shape)
         mask = np.ones(shape)
+        # print("mask:", type(mask))
 
         for im in imstack:
+            # print("mask")
             im_mask = np.where(np.abs(im) <= threshold, 0, 1)
             mask *= im_mask
+            # print(mask)
 
         # shrink mask slightly
         its = int(min(15, self.shape[0] // 250, self.shape[1] // 250))

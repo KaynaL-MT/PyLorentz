@@ -166,6 +166,7 @@ def load_data(
         flipstack = al_stack[num_files:]
     else:
         imstack = al_stack
+        print(imstack)
         flipstack = []
 
     # show_im(imstack[num_files // 2])
@@ -173,6 +174,7 @@ def load_data(
 
     # read the defocus values
     defvals = fls[-(num_files // 2) :]
+    print(defvals)
     assert num_files == 2 * len(defvals) + 1
     defvals = [float(i) for i in defvals]  # defocus values +/-
 
@@ -208,6 +210,8 @@ def read_image(f):
                     scale *= 1e3
                 elif tif.imagej_metadata["unit"] == "mm":
                     scale *= 1e6
+                elif tif.imagej_metadata["unit"] == "micron":
+                    scale *= 1e3
                 else:
                     raise NotImplementedError(
                         f'Found unknown scale unit of: {tif.imagej_metadata["unit"]}'
