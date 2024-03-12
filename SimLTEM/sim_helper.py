@@ -172,6 +172,7 @@ def sim_images(
     pscope.defocus = -def_val
     im_un = pscope.getImage(ObjWave, qq, del_px)
     pscope.defocus = def_val
+    print("def_val:", -def_val, +def_val)
     im_ov = pscope.getImage(ObjWave, qq, del_px)
 
     if save_path is not None:

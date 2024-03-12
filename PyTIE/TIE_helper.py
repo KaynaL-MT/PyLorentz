@@ -175,6 +175,7 @@ def load_data(
     # read the defocus values
     defvals = fls[-(num_files // 2) :]
     print(defvals)
+    print(len(defvals))
     assert num_files == 2 * len(defvals) + 1
     defvals = [float(i) for i in defvals]  # defocus values +/-
 
